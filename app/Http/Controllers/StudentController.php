@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -20,11 +20,18 @@ class StudentController extends Controller
             'first_name' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
             'birth_date' => 'nullable|date',
+            'school' => 'required|string',
         ]);
 
-        $validated['password'] = bcrypt('test');
+        $validated['password'] = bcrypt('test1');
 
-        User::create($validated);
+        $user = User::create($validated);
+
+        UserSchool::create([
+            'user_id' => $user->id,
+            'school_id' => $validated['school'],
+            'role' => 'student',
+        ]);
 
         return redirect()->back()->with('success');
     }

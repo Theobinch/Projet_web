@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -18,11 +19,18 @@ class TeacherController extends Controller
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
+            'school' => 'required|string',
         ]);
 
         $validated['password'] = bcrypt('test1');
 
-        User::create($validated);
+        $user = User::create($validated);
+
+        UserSchool::create([
+            'user_id' => $user->id,
+            'school_id' => $validated['school'],
+            'role' => 'teacher',
+        ]);
 
         return redirect()->back()->with('success');
     }

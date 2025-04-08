@@ -120,6 +120,10 @@
 
                     <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" placeholder="" />
 
+                    <x-forms.dropdown type="select" name="school" :label="__('Etablissement')">
+                        <option value="1">{{ __('Coding Factory') }}</option>
+                    </x-forms.dropdown>
+
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>

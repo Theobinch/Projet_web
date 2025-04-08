@@ -109,6 +109,10 @@
 
                     <x-forms.input name="email" :label="__('Email')" />
 
+                    <x-forms.dropdown type="select" name="school" :label="__('Etablissement')">
+                        <option value="1">{{ __('Coding Factory') }}</option>
+                    </x-forms.dropdown>
+
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
