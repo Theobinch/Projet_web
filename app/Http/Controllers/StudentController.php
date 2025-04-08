@@ -20,17 +20,12 @@ class StudentController extends Controller
             'first_name' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email',
             'birth_date' => 'nullable|date',
-            'password' => 'nullable|string|min:8|confirmed',
         ]);
 
-
-        if (!empty($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
+        $validated['password'] = bcrypt('test');
 
         User::create($validated);
 
-
-
+        return redirect()->back()->with('success');
     }
 }

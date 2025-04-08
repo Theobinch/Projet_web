@@ -98,9 +98,22 @@
                         Ajouter un Enseignant
                     </h3>
                 </div>
+
+                <form method="POST" action="{{ route('teacher.store') }}">
+                    @csrf
+
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <x-forms.input name="last_name" :label="__('Nom')" />
+
+                    <x-forms.input name="first_name" :label="__('Prénom')" />
+
+                    <x-forms.input name="email" :label="__('Email')" />
+
+                    <x-forms.primary-button>
+                        {{ __('Valider') }}
+                    </x-forms.primary-button>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>

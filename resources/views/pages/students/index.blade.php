@@ -120,10 +120,6 @@
 
                     <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" placeholder="" />
 
-                    <x-forms.input name="password" :label="__('Mot de passe')" />
-
-                    <x-forms.input name="password_confirmation" :label="__('Confirmation du mot de passe')" />
-
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
