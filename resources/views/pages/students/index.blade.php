@@ -99,6 +99,7 @@
                 </div>
             </div>
         </div>
+
         <div class="lg:col-span-1">
             <div class="card h-full">
                 <div class="card-header">
@@ -106,10 +107,28 @@
                         Ajouter un étudiant
                     </h3>
                 </div>
+
+                <form method="POST" action="{{ route('student.store') }}">
+                    @csrf
+
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <x-forms.input name="last_name" :label="__('Nom')" />
+
+                    <x-forms.input name="first_name" :label="__('Prénom')" />
+
+                    <x-forms.input name="email" :label="__('Email')" />
+
+                    <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" placeholder="" />
+
+                    <x-forms.input name="password" :label="__('Mot de passe')" />
+
+                    <x-forms.input name="password_confirmation" :label="__('Confirmation du mot de passe')" />
+
+                    <x-forms.primary-button>
+                        {{ __('Valider') }}
+                    </x-forms.primary-button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
