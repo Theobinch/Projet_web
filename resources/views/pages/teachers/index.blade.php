@@ -37,33 +37,29 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach ($teachers as $teacher)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
+                                            <td>{{ $teacher->user?->last_name ?? '---' }}</td>
+                                            <td>{{ $teacher->user?->first_name ?? '---' }}</td>
+                                            <td>{{ $teacher->user?->email ?? '---' }}</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
-
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
+                                                        @if ($teacher->school->name === 'Coding Factory')
+                                                            <i class="text-success ki-filled ki-shield-tick"></i>
+                                                        @else
+                                                            <i class="text-danger ki-filled ki-shield-cross"></i>
+                                                        @endif
                                                     </a>
                                                     <a class="hover:text-primary cursor-pointer" href="#"
                                                        data-modal-toggle="#student-modal">
@@ -72,6 +68,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -110,7 +107,9 @@
                     <x-forms.input name="email" :label="__('Email')" />
 
                     <x-forms.dropdown type="select" name="school" :label="__('Etablissement')">
-                        <option value="1">{{ __('Coding Factory') }}</option>
+                        @foreach ($schools as $school)
+                            <option value="{{ $school->id }}">{{ $school->name }}</option>
+                        @endforeach
                     </x-forms.dropdown>
 
                     <x-forms.primary-button>

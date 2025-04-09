@@ -47,16 +47,26 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach ($students as $student)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
+                                            <td>{{ $student->user?->last_name ?? '---' }}</td>
+                                            <td>{{ $student->user?->first_name ?? '---' }}</td>
+                                            <td>
+                                                @if($student->user && $student->user->birth_date)
+                                                    {{ \Carbon\Carbon::parse($student->user->birth_date)->format('d/m/Y') }}
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
+                                                        @if ($student->school->name === 'Coding Factory')
+                                                            <i class="text-success ki-filled ki-shield-tick"></i>
+                                                        @else
+                                                            <i class="text-danger ki-filled ki-shield-cross"></i>
+                                                        @endif
                                                     </a>
-
                                                     <a class="hover:text-primary cursor-pointer" href="#"
                                                        data-modal-toggle="#student-modal">
                                                         <i class="ki-filled ki-cursor"></i>
@@ -64,22 +74,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

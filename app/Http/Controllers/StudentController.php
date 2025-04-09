@@ -10,7 +10,8 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return view('pages.students.index');
+        $students = UserSchool::with('user')->where('role', 'student')->get();
+        return view('pages.students.index', compact('students'));
     }
 
     public function store(Request $request)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
@@ -10,7 +11,9 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        return view('pages.teachers.index');
+        $schools = School::all();
+        $teachers = UserSchool::with('user')->where('role', 'teacher')->get();
+        return view('pages.teachers.index',compact('schools'), compact('teachers'));
     }
 
     public function store(Request $request)
@@ -19,7 +22,7 @@ class TeacherController extends Controller
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'school' => 'required|string',
+            'school' => 'required|exists:schools,id',
         ]);
 
         $validated['password'] = bcrypt('test1');
