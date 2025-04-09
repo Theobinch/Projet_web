@@ -55,7 +55,7 @@
                                                 @if($student->user && $student->user->birth_date)
                                                     {{ \Carbon\Carbon::parse($student->user->birth_date)->format('d/m/Y') }}
                                                 @else
-                                                    N/A
+                                                    Pas d'anniv
                                                 @endif
                                             </td>
                                             <td>
@@ -116,7 +116,9 @@
                     <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" placeholder="" />
 
                     <x-forms.dropdown type="select" name="school" :label="__('Etablissement')">
-                        <option value="1">{{ __('Coding Factory') }}</option>
+                        @foreach ($schools as $school)
+                            <option value="{{ $school->id }}">{{ $school->name }}</option>
+                        @endforeach
                     </x-forms.dropdown>
 
                     <x-forms.primary-button>
