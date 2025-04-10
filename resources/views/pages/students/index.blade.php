@@ -71,6 +71,15 @@
                                                        data-modal-toggle="#student-modal">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
+
+                                                    <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Tu veux vraiment supp ?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="cursor-pointer text-red-600">
+                                                            <i class="ki-filled ki-trash"></i>
+                                                        </button>
+                                                    </form>
+
                                                 </div>
                                             </td>
                                         </tr>

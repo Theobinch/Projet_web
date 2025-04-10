@@ -37,4 +37,15 @@ class TeacherController extends Controller
 
         return redirect()->back()->with('success');
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        \DB::table('users_schools')->where('user_id', $user->id)->delete();
+
+        $user->delete();
+
+        return redirect()->route('teacher.index');
+    }
 }

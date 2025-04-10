@@ -64,4 +64,15 @@ class StudentController extends Controller
         }
         return redirect()->route('student.index');
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        \DB::table('users_schools')->where('user_id', $user->id)->delete();
+
+        $user->delete();
+
+        return redirect()->route('student.index');
+    }
 }
