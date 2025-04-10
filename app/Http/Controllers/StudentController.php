@@ -35,22 +35,33 @@ class StudentController extends Controller
             'role' => 'student',
         ]);
 
-        return redirect()->back()->with('success');
+        return redirect()->back();
     }
 
-    public function destroy($id)
+    public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'birth_date' => 'nullable|date',
+            'email' => 'required|email|unique:users,email,' . $id,
+        ]);
 
-        $userSchool = UserSchool::where('user_id', $id)->where('role', 'student')->first();
+        $user = User::findOrFail($id);
 
-        if ($userSchool) {
+        $user->update([
+            'last_name' => $validated['last_name'],
+            'first_name' => $validated['first_name'],
+            'birth_date' => $validated['birth_date'],
+            'email' => $validated['email'],
+        ]);
 
-            $userSchool->delete();
-
-            $user = User::findOrFail($userSchool->user_id);
-            $user->delete();
+        $school = $user->school();
+        if ($school) {
+            \DB::table('users_schools')
+                ->where('user_id', $user->id)
+                ->where('school_id', $school->id);
         }
-
-        return redirect()->route('students.index')->with('success');
+        return redirect()->route('student.index');
     }
 }

@@ -55,7 +55,7 @@
                                                 @if($student->user && $student->user->birth_date)
                                                     {{ \Carbon\Carbon::parse($student->user->birth_date)->format('d/m/Y') }}
                                                 @else
-                                                    Pas d'anniv
+                                                    Pas d'anniversaire
                                                 @endif
                                             </td>
                                             <td>

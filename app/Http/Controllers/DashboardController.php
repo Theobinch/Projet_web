@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -10,5 +11,6 @@ class DashboardController extends Controller
         $userRole = auth()->user()->school()->pivot->role;
 
         return view('pages.dashboard.dashboard-' . $userRole);
+
     }
 }

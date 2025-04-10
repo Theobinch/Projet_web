@@ -41,22 +41,36 @@
                                         </th>
                                     </tr>
                                     </thead>
+
                                     <tbody>
+                                    @foreach ($cohorts as $cohort)
                                         <tr>
-                                        <td>
-                                            <div class="flex flex-col gap-2">
+                                            <td>
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
-                                                    Promotion B1
-                                                </a>
-                                                <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
-                                    </tr>
+                                                    href="{{ route('cohort.show', 1) }}">
+                                                    {{ $cohort->name ?? '---' }}</a>
+                                            </td>
+                                            <td>
+                                                @if ($cohort->start_date && $cohort->end_date)
+                                                    {{ \Carbon\Carbon::parse($cohort->start_date)->format('Y') }} -
+                                                    {{ \Carbon\Carbon::parse($cohort->end_date)->format('Y') }}
+                                                @else
+                                                    Pas de début
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="flex items-center justify-between">
+                                                    <a href="#">
+                                                        <span>{{ $cohort->students_count ?? '0' }}</span>
+                                                    </a>
+                                                    <a class="hover:text-primary cursor-pointer" href="#"
+                                                       data-modal-toggle="#cohort-modal">
+                                                        <i class="ki-filled ki-cursor"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -83,19 +97,31 @@
                         Ajouter une promotion
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
-                    <x-forms.input name="name" :label="__('Nom')" />
 
-                    <x-forms.input name="description" :label="__('Description')" />
+                <form method="POST" action="{{ route('cohort.store') }}">
+                    @csrf
 
-                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
+                    <div class="card-body flex flex-col gap-5">
+                        <x-forms.input name="name" :label="__('Nom')" />
 
-                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
+                        <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
-                </div>
+                        <x-forms.dropdown name="school_id" :label="__('École')">
+                            @foreach ($schools as $school)
+                                <option value="{{ $school->id }}">{{ $school->name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
+
+                        <x-forms.input type="date" name="start_date" :label="__('Début de l\'année')" />
+
+                        <x-forms.input type="date" name="end_date" :label="__('Fin de l\'année')" />
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
