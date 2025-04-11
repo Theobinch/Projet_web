@@ -41,7 +41,7 @@
                                     </tr>
                                     </thead>
 
-                                    <tbody>>
+                                    <tbody>
                                     @foreach ($cohortStudents as $cohortStudent)
                                         <tr>
                                             <td>{{ $cohortStudent->last_name ?? '---' }}</td>
@@ -52,6 +52,17 @@
                                                 @else
                                                     Pas d'anniversaire
                                                 @endif
+                                            </td>
+                                            <td>
+
+                                                <form action="{{ route('cohort_student.delete', ['userId' => $cohortStudent->id, 'cohortId' => $cohort->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous supprimer cet étudiant de cette promotion ?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="cursor-pointer text-red-600">
+                                                        <i class="ki-filled ki-trash"></i>
+                                                    </button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
 use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
@@ -74,5 +75,12 @@ class StudentController extends Controller
         $user->delete();
 
         return redirect()->route('student.index');
+    }
+
+    public function deleteToCohort($userId, $cohortId)
+    {
+        \DB::table('cohort_student')->where('user_id', $userId)->where('cohort_id', $cohortId)->delete();
+
+        return redirect()->route('cohort.show', ['cohort' => $cohortId]);
     }
 }
