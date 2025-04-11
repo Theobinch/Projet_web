@@ -63,6 +63,7 @@
                                                     <a href="#">
                                                         <span>{{ $cohort->studentCount }}</span>
                                                     </a>
+
                                                     <a class="hover:text-primary cursor-pointer" href="#"
                                                        data-modal-toggle="#cohort-modal">
                                                         <i class="ki-filled ki-cursor"></i>
