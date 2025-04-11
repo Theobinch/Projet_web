@@ -32,8 +32,17 @@ class CohortController extends Controller
      */
     public function show(Cohort $cohort) {
 
+        $cohortStudents = $cohort->students;
+
+        $students = User::join('users_schools', 'users.id', '=', 'users_schools.user_id')
+            ->where('users_schools.role', 'student')
+            ->select('users.*')
+            ->get();
+
         return view('pages.cohorts.show', [
-            'cohort' => $cohort
+            'cohort' => $cohort,
+            'students' => $students,
+            'cohortStudents' => $cohortStudents
         ]);
     }
 
@@ -65,5 +74,16 @@ class CohortController extends Controller
         $cohort->delete();
 
         return redirect()->route('cohort.index');
+    }
+
+    public function addStudent(Request $request, Cohort $cohort)
+    {
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $cohort->students()->attach($validated['user_id']);
+
+        return redirect()->route('cohort.show', $cohort);
     }
 }

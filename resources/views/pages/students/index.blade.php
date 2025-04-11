@@ -46,6 +46,7 @@
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
+
                                     <tbody>
                                     @foreach ($students as $student)
                                         <tr>
@@ -58,33 +59,10 @@
                                                     Pas d'anniversaire
                                                 @endif
                                             </td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        @if ($student->school->name === 'Coding Factory')
-                                                            <i class="text-success ki-filled ki-shield-tick"></i>
-                                                        @else
-                                                            <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                        @endif
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-
-                                                    <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet étudiant ?')">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="cursor-pointer text-red-600">
-                                                            <i class="ki-filled ki-trash"></i>
-                                                        </button>
-                                                    </form>
-
-                                                </div>
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">

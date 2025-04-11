@@ -40,16 +40,23 @@
                                         <th class="max-w-[50px]"></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+
+                                    <tbody>>
+                                    @foreach ($cohortStudents as $cohortStudent)
                                         <tr>
-                                        <td>Doe</td>
-                                        <td>John</td>
-                                        <td>10/02/2000</td>
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
-                                        </td>
-                                    </tr>
+                                            <td>{{ $cohortStudent->last_name ?? '---' }}</td>
+                                            <td>{{ $cohortStudent->first_name ?? '---' }}</td>
+                                            <td>
+                                                @if($cohortStudent->birth_date)
+                                                    {{ \Carbon\Carbon::parse($cohortStudent->birth_date)->format('d/m/Y') }}
+                                                @else
+                                                    Pas d'anniversaire
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
@@ -75,15 +82,24 @@
                         Ajouter un étudiant à la promotion
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
-                    </x-forms.dropdown>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
-                </div>
+                <form method="POST" action="{{ route('cohort.addStudent', $cohort->id) }}">
+                    @csrf
+                    <div class="card-body flex flex-col gap-5">
+
+                        <x-forms.dropdown type="select" name="user_id" :label="__('Etudiant')">
+                            @foreach ($students as $student)
+                                <option value="{{ $student->id }}">
+                                    {{ $student->last_name }} {{ $student->first_name }}
+                                </option>
+                            @endforeach
+                        </x-forms.dropdown>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

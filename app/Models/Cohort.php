@@ -13,5 +13,10 @@ class Cohort extends Model
     {
         return $this->belongsTo(School::class);
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(User::class, 'cohort_student');
+    }
 }
 

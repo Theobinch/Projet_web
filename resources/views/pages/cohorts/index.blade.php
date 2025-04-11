@@ -47,7 +47,7 @@
                                         <tr>
                                             <td>
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                    href="{{ route('cohort.show', 1) }}">
+                                                    href="{{ route('cohort.show', $cohort->id) }}">
                                                     {{ $cohort->name ?? '---' }}</a>
                                             </td>
                                             <td>
