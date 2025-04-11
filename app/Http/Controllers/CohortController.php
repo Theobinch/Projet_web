@@ -61,11 +61,8 @@ class CohortController extends Controller
 
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-
-        \DB::table('users_schools')->where('user_id', $user->id)->delete();
-
-        $user->delete();
+        $cohort = Cohort::findOrFail($id);
+        $cohort->delete();
 
         return redirect()->route('cohort.index');
     }

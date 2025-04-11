@@ -68,7 +68,7 @@
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
 
-                                                    <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Tu veux vraiment supp ?');">
+                                                    <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette promotion ?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="cursor-pointer text-red-600">

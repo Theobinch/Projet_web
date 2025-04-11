@@ -66,7 +66,7 @@
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
 
-                                                    <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" onsubmit="return confirm('Tu veux vraiment supp ?');">
+                                                    <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet enseignant ?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="cursor-pointer text-red-600">
