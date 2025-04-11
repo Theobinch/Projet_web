@@ -58,6 +58,7 @@
                                     </tbody>
 
                                 </table>
+
                             </div>
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
                                 <div class="flex items-center gap-2 order-2 md:order-1">

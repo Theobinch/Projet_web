@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Cohort;
 use App\Models\School;
 use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CohortController extends Controller
 {
@@ -21,7 +23,13 @@ class CohortController extends Controller
         $schools = School::all();
         $cohorts = Cohort::with('school')->get();
 
-        return view('pages.cohorts.index', compact('schools', 'cohorts'));
+        $cohortStudentCount = $cohorts->map(function ($cohort) {
+            $studentCount = DB::table('cohort_student')->where('cohort_id', $cohort->id)->count();
+            $cohort->studentCount = $studentCount;
+            return $cohort;
+        });
+
+        return view('pages.cohorts.index', compact('schools', 'cohorts', 'cohortStudentCount'));
     }
 
 

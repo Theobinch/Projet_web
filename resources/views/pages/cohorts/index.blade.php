@@ -61,7 +61,7 @@
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
-                                                        <span>{{ $cohort->students_count ?? '0' }}</span>
+                                                        <span>{{ $cohort->studentCount }}</span>
                                                     </a>
                                                     <a class="hover:text-primary cursor-pointer" href="#"
                                                        data-modal-toggle="#cohort-modal">
