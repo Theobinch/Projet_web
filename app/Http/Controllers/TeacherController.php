@@ -6,6 +6,7 @@ use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TeacherController extends Controller
 {
@@ -25,7 +26,9 @@ class TeacherController extends Controller
             'school' => 'required|exists:schools,id',
         ]);
 
-        $validated['password'] = bcrypt('test1');
+        $randomPassword = Str::random(15);
+        $validated['password'] = bcrypt($randomPassword);
+
 
         $user = User::create($validated);
 
@@ -47,5 +50,12 @@ class TeacherController extends Controller
         $user->delete();
 
         return redirect()->route('teacher.index');
+    }
+
+    public function deleteToCohort($userId, $cohortId)
+    {
+        \DB::table('cohort_teacher')->where('user_id', $userId)->where('cohort_id', $cohortId)->delete();
+
+        return redirect()->route('cohort.show', ['cohort' => $cohortId]);
     }
 }

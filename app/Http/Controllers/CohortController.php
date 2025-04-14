@@ -38,19 +38,28 @@ class CohortController extends Controller
      * @param Cohort $cohort
      * @return Application|Factory|object|View
      */
+
     public function show(Cohort $cohort) {
 
         $cohortStudents = $cohort->students;
+        $cohortTeachers = $cohort->teachers;
 
         $students = User::join('users_schools', 'users.id', '=', 'users_schools.user_id')
             ->where('users_schools.role', 'student')
             ->select('users.*')
             ->get();
 
+        $teachers = User::join('users_schools', 'users.id', '=', 'users_schools.user_id')
+            ->where('users_schools.role', 'teacher')
+            ->select('users.*')
+            ->get();
+
         return view('pages.cohorts.show', [
             'cohort' => $cohort,
             'students' => $students,
-            'cohortStudents' => $cohortStudents
+            'teachers' => $teachers,
+            'cohortStudents' => $cohortStudents,
+            'cohortTeachers' => $cohortTeachers
         ]);
     }
 
@@ -90,7 +99,26 @@ class CohortController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
+        $studentAlreadyAssigned = DB::table('cohort_student')
+            ->where('user_id', $validated['user_id'])
+            ->exists();
+
+        if ($studentAlreadyAssigned) {
+            return back()->with('error', 'Cet étudiant est déjà assigné à une autre promotion.');
+        }
+
         $cohort->students()->attach($validated['user_id']);
+
+        return redirect()->route('cohort.show', $cohort);
+    }
+
+    public function addTeacher(Request $request, Cohort $cohort)
+    {
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $cohort->teachers()->attach($validated['user_id']);
 
         return redirect()->route('cohort.show', $cohort);
     }

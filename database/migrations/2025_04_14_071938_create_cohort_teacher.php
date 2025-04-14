@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cohort_student', function (Blueprint $table) {
+        Schema::create('cohort_teacher', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cohort_id');
             $table->unsignedBigInteger('user_id');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cohort_student');
+        Schema::dropIfExists('cohort_teacher');
     }
 };

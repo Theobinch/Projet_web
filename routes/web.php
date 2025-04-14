@@ -30,11 +30,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/cohorts', [CohortController::class, 'store'])->name('cohort.store');
         Route::delete('/cohorts/{id}', [CohortController::class, 'destroy'])->name('cohort.destroy');
         Route::post('cohorts/{cohort}/add-student', [CohortController::class, 'addStudent'])->name('cohort.addStudent');
+        Route::post('cohorts/{cohort}/add-teacher', [CohortController::class, 'addTeacher'])->name('cohort.addTeacher');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
         Route::post('/teachers', [TeacherController::class, 'store'])->name('teacher.store');
         Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
+        Route::delete('/teachers/{userId}/cohort/{cohortId}', [TeacherController::class, 'deleteToCohort'])->name('cohort_teacher.delete');
 
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');

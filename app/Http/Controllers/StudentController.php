@@ -7,6 +7,7 @@ use App\Models\School;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -26,7 +27,8 @@ class StudentController extends Controller
             'school' => 'required|exists:schools,id',
         ]);
 
-        $validated['password'] = bcrypt('test1');
+        $randomPassword = Str::random(15);
+        $validated['password'] = bcrypt($randomPassword);
 
         $user = User::create($validated);
 
