@@ -69,7 +69,8 @@
                                                        @endif
                                                     </a>
                                                     <a class="hover:text-primary cursor-pointer" href="#"
-                                                        data-modal-toggle="#student-modal">
+                                                        data-modal-toggle="#student-modal"
+                                                        data-student="{{ route('student.form', $student) }}">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
 

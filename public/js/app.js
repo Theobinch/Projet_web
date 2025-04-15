@@ -10471,7 +10471,36 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \********************************/
 /***/ (() => {
 
-console.log("Script.js est bien inclus !");
+document.addEventListener('DOMContentLoaded', function () {
+  var studentButtons = document.querySelectorAll('[data-modal-toggle="#student-modal"]');
+  studentButtons.forEach(function (studentButton) {
+    studentButton.addEventListener('click', function () {
+      var url = this.getAttribute('data-student');
+      var modalBody = document.querySelector('#student-modal .modal-body');
+      modalBody.innerHTML = "Chargement...";
+      console.log(url);
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        modalBody.innerHTML = data.html;
+      });
+    });
+  });
+  var teacherButtons = document.querySelectorAll('[data-modal-toggle="#teacher-modal"]');
+  teacherButtons.forEach(function (teacherButton) {
+    teacherButton.addEventListener('click', function () {
+      var url = this.getAttribute('data-teacher');
+      var modalBody = document.querySelector('#teacher-modal .modal-body');
+      modalBody.innerHTML = "Chargement...";
+      console.log(url);
+      fetch(url).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        modalBody.innerHTML = data.html;
+      });
+    });
+  });
+});
 
 /***/ }),
 

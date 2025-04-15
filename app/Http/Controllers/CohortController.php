@@ -38,7 +38,6 @@ class CohortController extends Controller
      * @param Cohort $cohort
      * @return Application|Factory|object|View
      */
-
     public function show(Cohort $cohort) {
 
         $cohortStudents = $cohort->students;
@@ -65,7 +64,6 @@ class CohortController extends Controller
 
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',

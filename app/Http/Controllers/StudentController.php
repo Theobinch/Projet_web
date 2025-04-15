@@ -65,6 +65,7 @@ class StudentController extends Controller
                 ->where('user_id', $user->id)
                 ->where('school_id', $school->id);
         }
+
         return redirect()->route('student.index');
     }
 
@@ -84,5 +85,12 @@ class StudentController extends Controller
         \DB::table('cohort_student')->where('user_id', $userId)->where('cohort_id', $cohortId)->delete();
 
         return redirect()->route('cohort.show', ['cohort' => $cohortId]);
+    }
+
+    public function getForm(User $student) {
+
+        $html = view('pages.students.student-form', compact('student'))->render();
+
+        return response()->json(['html' => $html]);
     }
 }

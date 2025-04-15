@@ -35,10 +35,11 @@ Route::middleware('auth')->group(function () {
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
         Route::post('/teachers', [TeacherController::class, 'store'])->name('teacher.store');
+        Route::put('/teachers/{id}', [TeacherController::class, 'update'])->name('teacher.update');
         Route::delete('/teachers/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
         Route::delete('/teachers/{userId}/cohort/{cohortId}', [TeacherController::class, 'deleteToCohort'])->name('cohort_teacher.delete');
         Route::get('/teachers/{id}/cohorts', [TeacherController::class, 'showTeacherCohorts'])->name('teacher.cohorts');
-
+        Route::get('teacher/form/{teacher}', [TeacherController::class, 'getForm'])->name('teacher.form');
 
         // Students
         Route::get('students', [StudentController::class, 'index'])->name('student.index');
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
         Route::put('/students/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
         Route::delete('/students/{userId}/cohort/{cohortId}', [StudentController::class, 'deleteToCohort'])->name('cohort_student.delete');
+        Route::get('student/form/{student}', [StudentController::class, 'getForm'])->name('student.form');
 
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');

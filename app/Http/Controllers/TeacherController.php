@@ -41,6 +41,32 @@ class TeacherController extends Controller
         return redirect()->back()->with('success');
     }
 
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'last_name' => $validated['last_name'],
+            'first_name' => $validated['first_name'],
+            'email' => $validated['email'],
+        ]);
+
+        $school = $user->school();
+        if ($school) {
+            \DB::table('users_schools')
+                ->where('user_id', $user->id)
+                ->where('school_id', $school->id);
+        }
+
+        return redirect()->route('teacher.index');
+    }
+
     public function destroy($id)
     {
         $user = User::findOrFail($id);
@@ -57,5 +83,12 @@ class TeacherController extends Controller
         \DB::table('cohort_teacher')->where('user_id', $userId)->where('cohort_id', $cohortId)->delete();
 
         return redirect()->route('cohort.show', ['cohort' => $cohortId]);
+    }
+
+    public function getForm(User $teacher) {
+
+        $html = view('pages.teachers.teacher-form', compact('teacher'))->render();
+
+        return response()->json(['html' => $html]);
     }
 }
