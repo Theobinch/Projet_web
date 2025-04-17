@@ -46,6 +46,12 @@
                                     @foreach ($cohorts as $cohort)
                                         <tr>
                                             <td>
+                                                <a class="hover:text-primary cursor-pointer" href="#"
+                                                   data-modal-toggle="#cohort-modal"
+                                                   data-cohort="{{ route('cohort.form', $cohort) }}">
+                                                    <i class="ki-filled ki-cursor"></i>
+                                                </a>
+
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
                                                     href="{{ route('cohort.show', $cohort->id) }}">
                                                     {{ $cohort->name ?? '---' }}</a>
@@ -62,11 +68,6 @@
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
                                                         <span>{{ $cohort->studentCount }}</span>
-                                                    </a>
-
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#cohort-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
                                                     </a>
 
                                                     <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette promotion ?')">
@@ -137,3 +138,5 @@
     </div>
     <!-- end: grid -->
 </x-app-layout>
+
+@include('pages.cohorts.cohort-modal')

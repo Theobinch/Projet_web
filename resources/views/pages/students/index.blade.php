@@ -50,7 +50,16 @@
                                     <tbody>
                                     @foreach ($students as $student)
                                         <tr>
-                                            <td>{{ $student->user?->last_name ?? '---' }}</td>
+
+                                            <td>
+                                                <a class="hover:text-primary cursor-pointer" href="#"
+                                                   data-modal-toggle="#student-modal"
+                                                   data-student="{{ route('student.form', $student) }}">
+                                                    <i class="ki-filled ki-cursor"></i>
+                                                </a>
+
+                                                {{ $student->user?->last_name ?? '---' }}</td>
+
                                             <td>{{ $student->user?->first_name ?? '---' }}</td>
                                             <td>
                                                 @if($student->user && $student->user->birth_date)
@@ -58,6 +67,7 @@
                                                 @else
                                                     Pas d'anniversaire
                                                 @endif
+
                                             </td>
                                             <td>
                                                 <div class="flex items-center justify-between">
@@ -67,11 +77,6 @@
                                                         @else
                                                             <i class="text-danger ki-filled ki-shield-cross"></i>
                                                        @endif
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                        data-modal-toggle="#student-modal"
-                                                        data-student="{{ route('student.form', $student) }}">
-                                                        <i class="ki-filled ki-cursor"></i>
                                                     </a>
 
                                                     <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet étudiant ?')">

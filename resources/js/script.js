@@ -41,4 +41,25 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
         });
     });
+
+    const cohortButtons = document.querySelectorAll('[data-modal-toggle="#cohort-modal"]');
+
+    cohortButtons.forEach(function (cohortButton) {
+        cohortButton.addEventListener('click', function () {
+            const url = this.getAttribute('data-cohort');
+            let modalBody = document.querySelector('#cohort-modal .modal-body');
+
+            modalBody.innerHTML = "Chargement...";
+
+            console.log(url)
+
+            fetch(url)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    modalBody.innerHTML = data.html;
+                })
+        });
+    });
 });

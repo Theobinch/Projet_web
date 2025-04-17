@@ -49,7 +49,15 @@
                                     <tbody>
                                     @foreach ($teachers as $teacher)
                                         <tr>
-                                            <td>{{ $teacher->user?->last_name ?? '---' }}</td>
+                                            <td>
+                                                <a class="hover:text-primary cursor-pointer" href="#"
+                                                   data-modal-toggle="#teacher-modal"
+                                                   data-teacher="{{ route('teacher.form', $teacher) }}">
+                                                    <i class="ki-filled ki-cursor"></i>
+                                                </a>
+
+                                                {{ $teacher->user?->last_name ?? '---' }}
+                                            </td>
                                             <td>{{ $teacher->user?->first_name ?? '---' }}</td>
                                             <td>{{ $teacher->user?->email ?? '---' }}</td>
                                             <td>
@@ -60,11 +68,6 @@
                                                         @else
                                                             <i class="text-danger ki-filled ki-shield-cross"></i>
                                                         @endif
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                        data-modal-toggle="#teacher-modal"
-                                                        data-teacher="{{ route('teacher.form', $teacher) }}">
-                                                        <i class="ki-filled ki-cursor"></i>
                                                     </a>
 
                                                     <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet enseignant ?')">

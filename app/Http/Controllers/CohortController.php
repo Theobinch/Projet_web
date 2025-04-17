@@ -120,4 +120,30 @@ class CohortController extends Controller
 
         return redirect()->route('cohort.show', $cohort);
     }
+
+    public function update(Request $request, $id)
+    {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'end_date' => 'required|date|after_or_equal:start_date',
+    ]);
+
+    $cohort = Cohort::findOrFail($id);
+
+    $cohort->update([
+        'name' => $validated['name'],
+        'start_date' => $validated['start_date'],
+        'end_date' => $validated['end_date'],
+    ]);
+
+    return redirect()->route('cohort.index');
+    }
+
+    public function getForm(Cohort $cohort) {
+
+        $html = view('pages.cohorts.cohort-form', compact('cohort'))->render();
+
+        return response()->json(['html' => $html]);
+    }
 }
