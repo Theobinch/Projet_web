@@ -13,7 +13,14 @@ class CohortPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->school()->pivot->role == 'admin';
+        if ($user->school()->pivot->role == 'admin'){
+            return true;
+        }
+
+        if ($user->school()->pivot->role == 'teacher'){
+            return $user->cohorts()->exists();
+        }
+        return false;
     }
 
     /**
@@ -29,7 +36,7 @@ class CohortPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->school()->pivot->role === 'admin';
     }
 
     /**
@@ -37,7 +44,7 @@ class CohortPolicy
      */
     public function update(User $user, Cohort $cohort): bool
     {
-        return false;
+        return $user->school()->pivot->role === 'admin';
     }
 
     /**
@@ -45,7 +52,7 @@ class CohortPolicy
      */
     public function delete(User $user, Cohort $cohort): bool
     {
-        return false;
+        return $user->school()->pivot->role === 'admin';
     }
 
     /**

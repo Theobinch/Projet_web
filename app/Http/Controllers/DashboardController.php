@@ -12,6 +12,9 @@ class DashboardController extends Controller
     {
 
         $userRole = auth()->user()->school()->pivot->role;
+
+        $cohorts = Cohort::all();
+
         $studentCount = UserSchool::where('role', 'student')->count();
         $teacherCount = UserSchool::where('role', 'teacher')->count();
         $cohortCount = Cohort::count();
@@ -20,6 +23,6 @@ class DashboardController extends Controller
             'studentCount' => $studentCount,
             'teacherCount' => $teacherCount,
             'cohortCount' => $cohortCount,
-        ]);
+        ], compact('cohorts'));
     }
 }

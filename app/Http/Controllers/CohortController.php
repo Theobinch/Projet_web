@@ -9,19 +9,31 @@ use App\Models\UserSchool;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CohortController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display all available cohorts
      * @return Factory|View|Application|object
      */
     public function index() {
 
+        $user = auth()->user();
+
+        $this->authorize('viewAny', Cohort::class);
+
+        if ($user->school()->pivot->role == 'admin'){
+            $cohorts = Cohort::all();
+        } else {
+            $cohorts = $user->cohorts()->get();
+        }
+
         $schools = School::all();
-        $cohorts = Cohort::with('school')->get();
 
         $cohortStudentCount = $cohorts->map(function ($cohort) {
             $studentCount = DB::table('cohort_student')->where('cohort_id', $cohort->id)->count();

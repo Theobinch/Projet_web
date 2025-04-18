@@ -43,8 +43,6 @@
                             <span>{{ $teacherCount }}</span>
                         </a>
                     </div>
-                    <div class="card-body flex flex-col gap-5">
-                    </div>
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
                     </x-forms.primary-button>
@@ -62,8 +60,6 @@
                         <a href="#">
                             <span>{{ $studentCount }}</span>
                         </a>
-                    </div>
-                    <div class="card-body flex flex-col gap-5">
                     </div>
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
@@ -84,8 +80,6 @@
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
                     </x-forms.primary-button>
-                    <div class="card-body flex flex-col gap-5">
-                    </div>
                 </div>
             </div>
         </form>

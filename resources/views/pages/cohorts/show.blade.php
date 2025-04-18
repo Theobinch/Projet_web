@@ -1,4 +1,7 @@
 <x-app-layout>
+    @php
+        $userRole = auth()->user()->school()->pivot->role ?? null;
+    @endphp
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">{{ $cohort->name }}</span>
@@ -42,6 +45,7 @@
                                             <td>{{ $cohortTeacher->first_name ?? '---' }}</td>
 
                                             <td>
+                                                @if ($userRole === 'admin')
                                                 <form action="{{ route('cohort_teacher.delete', ['userId' => $cohortTeacher->id, 'cohortId' => $cohort->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous supprimer cet enseignant de cette promotion ?')">
                                                     @csrf
                                                     @method('DELETE')
@@ -49,7 +53,9 @@
                                                         <i class="ki-filled ki-trash"></i>
                                                     </button>
                                                 </form>
+                                                @endif
                                             </td>
+
                                         </tr>
                                     @endforeach
                                     </tbody>

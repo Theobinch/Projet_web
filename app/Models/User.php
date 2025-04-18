@@ -37,7 +37,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
     /**
      * Get the attributes that should be cast.
      *
@@ -81,5 +81,11 @@ class User extends Authenticatable
         return $this->belongsToMany(School::class, 'users_schools')
             ->withPivot('role')
             ->first();
+    }
+
+    public function cohorts()
+    {
+        return $this->belongsToMany(Cohort::class, 'cohort_teacher', 'user_id', 'cohort_id')
+            ->withTimestamps();
     }
 }

@@ -19,6 +19,25 @@
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
+                        @foreach($cohorts as $cohort)
+                            <div class="lg:col-span-2">
+                                <div class="card card-grid h-full min-w-full">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            {{ $cohort->name }}
+                                        </h3>
+                                    </div>
+                                    <div class="card-body flex flex-col gap-2">
+                                        <p class="text-sm text-gray-600">
+                                            Année :
+                                            {{ \Carbon\Carbon::parse($cohort->start_date)->format('Y') }} -
+                                            {{ \Carbon\Carbon::parse($cohort->end_date)->format('Y') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
             </div>
