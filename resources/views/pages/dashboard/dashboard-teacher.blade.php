@@ -29,11 +29,11 @@
                                         </h3>
                                     </div>
                                     <div class="card-body flex flex-col gap-2">
-                                        <p class="text-sm text-gray-600">
-                                            Année :
+                                        <div class="card card-grid h-full min-w-full">
+                                            - Année :
                                             {{ \Carbon\Carbon::parse($cohort->start_date)->format('Y') }} -
                                             {{ \Carbon\Carbon::parse($cohort->end_date)->format('Y') }}
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
