@@ -39,5 +39,11 @@ Story 5 :
 
 - Problème modifications promotions
 
+---
+
+## 🚀 J'ai pu résoudre plusieurs problèmes après la présentation telle que :
+
+- La modification des promotions
 
 
+- L'apparition des promotions en cours sur le dashboard enseignant 
