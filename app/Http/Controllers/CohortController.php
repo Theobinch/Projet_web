@@ -165,15 +165,16 @@ class CohortController extends Controller
 
     public function update(Request $request, $id)
     {
+
+    //recupere la promo a modifier
+    $cohort = Cohort::findOrFail($id);
+
    //valide les champs
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
     ]);
-
-    //recupere la promo a modifier
-    $cohort = Cohort::findOrFail($id);
 
     //met a jour la promo
     $cohort->update([

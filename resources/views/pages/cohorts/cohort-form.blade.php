@@ -10,11 +10,10 @@
             :messages="$errors->get('name')"
         />
 
-        <x-forms.input
-            type="date"
+        <x-forms.input type="date"
             name="start_date"
             :label="__('Date de début')"
-            :value="old('start_date', $cohort->start_date ? $cohort->start_date->format('Y-m-d') : '')"
+            :value="old('start_date', \Carbon\Carbon::parse($cohort->start_date)->format('Y-m-d'))"
             :messages="$errors->get('start_date')"
         />
 
@@ -22,7 +21,7 @@
             type="date"
             name="end_date"
             :label="__('Date de fin')"
-            :value="old('end_date', $cohort->end_date ? $cohort->end_date->format('Y-m-d') : '')"
+            :value="old('end_date', \Carbon\Carbon::parse($cohort->end_date)->format('Y-m-d'))"
             :messages="$errors->get('end_date')"
         />
 

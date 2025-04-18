@@ -6,7 +6,7 @@ Story non terminées : 2, 5, 6
 
 ---
 
-## Problèmes rencontrés non résolus
+## 🚧 Problèmes rencontrés non résolus
 
 Story 2 :
 
@@ -27,15 +27,21 @@ Story 6 :
 
 ---
 
-## Problèmes rencontrés résolus
+## ✅ Problèmes rencontrés résolus
 
-Story 3, 4 :
+Story 3 :
 
-- Problème de modification des promotions, enseignants et étudiants
+- Problème de modification des étudiants
 
 ---
 
-## Story réalisée sans gros problème 
+Story 4 :
+
+- Problème de modification des enseignants
+
+---
+
+## ✍️ Story réalisée sans gros problème 
 
 - Story 1
 

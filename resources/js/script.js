@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cohortButton.addEventListener('click', function () {
             //recupere url associé a la promo
             const url = this.getAttribute('data-cohort');
+
             //recupere modal par son id
             let modalBody = document.querySelector('#cohort-modal .modal-body');
 

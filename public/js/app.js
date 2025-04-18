@@ -10472,30 +10472,80 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (() => {
 
 document.addEventListener('DOMContentLoaded', function () {
+  //recupere tous les elements qui pointe vers #student-modal
   var studentButtons = document.querySelectorAll('[data-modal-toggle="#student-modal"]');
   studentButtons.forEach(function (studentButton) {
     studentButton.addEventListener('click', function () {
+      //recupere url associé a l'etudiant
       var url = this.getAttribute('data-student');
+      //recupere modal par son id
       var modalBody = document.querySelector('#student-modal .modal-body');
+
+      //affiche message de chargement
       modalBody.innerHTML = "Chargement...";
+
+      //débogage
       console.log(url);
+
+      //requete fetch pour recuperer donnée depuis url etudiant
       fetch(url).then(function (response) {
+        //renvoie en json
         return response.json();
       }).then(function (data) {
+        //met a jour le modal
         modalBody.innerHTML = data.html;
       });
     });
   });
+
+  //recupere tous les elements qui pointe vers #teacher-modal
   var teacherButtons = document.querySelectorAll('[data-modal-toggle="#teacher-modal"]');
   teacherButtons.forEach(function (teacherButton) {
     teacherButton.addEventListener('click', function () {
+      //recupere url associé a l'enseignant
       var url = this.getAttribute('data-teacher');
+      //recupere modal par son id
       var modalBody = document.querySelector('#teacher-modal .modal-body');
+
+      //affiche message de chargement
       modalBody.innerHTML = "Chargement...";
+
+      //débogage
       console.log(url);
+
+      //requete fetch pour recuperer donnée depuis url enseignant
       fetch(url).then(function (response) {
+        //renvoie en json
         return response.json();
       }).then(function (data) {
+        //met a jour le modal
+        modalBody.innerHTML = data.html;
+      });
+    });
+  });
+
+  //recupere tous les elements qui pointe vers #cohort-modal
+  var cohortButtons = document.querySelectorAll('[data-modal-toggle="#cohort-modal"]');
+  cohortButtons.forEach(function (cohortButton) {
+    cohortButton.addEventListener('click', function () {
+      //recupere url associé a la promo
+      var url = this.getAttribute('data-cohort');
+
+      //recupere modal par son id
+      var modalBody = document.querySelector('#cohort-modal .modal-body');
+
+      //affiche message de chargement
+      modalBody.innerHTML = "Chargement...";
+
+      //débogage
+      console.log(url);
+
+      //requete fetch pour recuperer donnée depuis url promo
+      fetch(url).then(function (response) {
+        //renvoie en json
+        return response.json();
+      }).then(function (data) {
+        //met a jour le modal
         modalBody.innerHTML = data.html;
       });
     });

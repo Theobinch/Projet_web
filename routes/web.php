@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/cohorts/{id}', [CohortController::class, 'destroy'])->name('cohort.destroy');
         Route::post('cohorts/{cohort}/add-student', [CohortController::class, 'addStudent'])->name('cohort.addStudent');
         Route::post('cohorts/{cohort}/add-teacher', [CohortController::class, 'addTeacher'])->name('cohort.addTeacher');
-        Route::get('cohort/form/{cohort}', [CohortController::class, 'getForm'])->name('cohort.form');
+        Route::get('/cohort/{cohort}/form', [CohortController::class, 'getForm'])->name('cohort.form');
 
         // Teachers
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
