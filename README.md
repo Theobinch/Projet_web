@@ -1,24 +1,12 @@
 # 🚀 Coding Tool Box – Guide d'installation
 
-Story réalisées : 1, 3, 4
+Story réalisées : 1, 2, 3, 4, 5
 
-Story non terminées : 2, 5, 6
+Story non terminées : 6
 
 ---
 
 ## 🚧 Problèmes rencontrés non résolus
-
-Story 2 :
-
-- Problème des "Promotions" en cours sur le dashboard
-
----
-
-Story 5 :
-
-- Problème modifications promotions
-
----
 
 Story 6 :
 
@@ -28,6 +16,12 @@ Story 6 :
 ---
 
 ## ✅ Problèmes rencontrés résolus
+
+Story 2 :
+
+- Problème des "Promotions" en cours sur le dashboard
+
+---
 
 Story 3 :
 
@@ -41,7 +35,9 @@ Story 4 :
 
 ---
 
-## ✍️ Story réalisée sans gros problème 
+Story 5 :
 
-- Story 1
+- Problème modifications promotions
+
+
 

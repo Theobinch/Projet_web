@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cohort;
 use App\Models\UserSchool;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,6 +16,10 @@ class DashboardController extends Controller
 
         //recupere toutes les promo
         $cohorts = Cohort::all();
+
+        //recupere les cohorts en fonction de l'annee
+        $currentYear = Carbon::now()->year;
+        $cohorts = Cohort::whereYear('start_date', '<=', $currentYear)->whereYear('end_date', '>=', $currentYear)->get();
 
         //compte le nombre d'etudiant dans l'ecole
         $studentCount = UserSchool::where('role', 'student')->count();

@@ -55,15 +55,14 @@
 
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
                                                     href="{{ route('cohort.show', $cohort->id) }}">
-                                                    {{ $cohort->name ?? '---' }}</a>
+                                                    {{ $cohort->name ?? '---' }}
+                                                </a>
                                             </td>
                                             <td>
                                                 <!-- date de debut et fin de la promo -->
                                                 @if ($cohort->start_date && $cohort->end_date)
                                                     {{ \Carbon\Carbon::parse($cohort->start_date)->format('Y') }} -
                                                     {{ \Carbon\Carbon::parse($cohort->end_date)->format('Y') }}
-                                                @else
-                                                    Pas de début
                                                 @endif
                                             </td>
                                             <td>
