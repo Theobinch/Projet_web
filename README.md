@@ -1,18 +1,22 @@
 # 🚀 Coding Tool Box – Guide d'installation
 
-Story réalisées : 1, 3, 4, 5
+Story réalisées : 1, 3, 4
 
-Story non terminées : 2, 6
+Story non terminées : 2, 5, 6
 
 ---
 
-##  Problèmes rencontrés non résolus
+## Problèmes rencontrés non résolus
 
 Story 2 :
 
-- Problème d'accès à l'onglet "Promotions" depuis le compte enseignant
-- Problème d'affichage de l'onglet "Promotions" sur le compte enseignant
-- Problème d'affichage des promotions en cours sur le compte enseignant
+- Problème des "Promotions" en cours sur le dashboard
+
+---
+
+Story 5 :
+
+- Problème modifications promotions
 
 ---
 
@@ -25,7 +29,7 @@ Story 6 :
 
 ## Problèmes rencontrés résolus
 
-Story 3, 4, 5 :
+Story 3, 4 :
 
 - Problème de modification des promotions, enseignants et étudiants
 

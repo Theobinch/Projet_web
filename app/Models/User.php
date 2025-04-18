@@ -37,7 +37,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    
+
     /**
      * Get the attributes that should be cast.
      *
@@ -68,10 +68,6 @@ class User extends Authenticatable
     {
         return $this->first_name . ' ' . $this->last_name[0] . '.';
     }
-
-    /**
-     * Retrieve the school of the user
-     */
 
     /**
      * @return (Model&object)|null

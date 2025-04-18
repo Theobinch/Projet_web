@@ -52,16 +52,18 @@
                                         <tr>
 
                                             <td>
+                                                <!-- bouton qui permet de modifier l'etudiant -->
                                                 <a class="hover:text-primary cursor-pointer" href="#"
                                                    data-modal-toggle="#student-modal"
                                                    data-student="{{ route('student.form', $student) }}">
                                                     <i class="ki-filled ki-cursor"></i>
                                                 </a>
-
+                                                <!-- permet d'entrer le nom de l'etudiant -->
                                                 {{ $student->user?->last_name ?? '---' }}</td>
-
+                                                <!-- permet d'entrer le prenom de l'etudiant -->
                                             <td>{{ $student->user?->first_name ?? '---' }}</td>
                                             <td>
+                                                <!-- permet d'entrer l'anniversaire de l'etudiant -->
                                                 @if($student->user && $student->user->birth_date)
                                                     {{ \Carbon\Carbon::parse($student->user->birth_date)->format('d/m/Y') }}
                                                 @else
@@ -71,6 +73,7 @@
                                             </td>
                                             <td>
                                                 <div class="flex items-center justify-between">
+                                                    <!-- permet de selectionner l'ecole -->
                                                     <a href="#">
                                                         @if ($student->school->name === 'Coding Factory')
                                                             <i class="text-success ki-filled ki-shield-tick"></i>
@@ -79,6 +82,7 @@
                                                        @endif
                                                     </a>
 
+                                                    <!-- permet de supprimer l'etudiant -->
                                                     <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet étudiant ?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -86,13 +90,12 @@
                                                             <i class="ki-filled ki-trash"></i>
                                                         </button>
                                                     </form>
-                                            </div>
-                                        </td>
+                                                </div>
+                                            </td>
                                         </tr>
                                     @endforeach
 
                                     </tbody>
-
                                 </table>
                             </div>
                             <div class="card-footer justify-center md:justify-between flex-col md:flex-row gap-5 text-gray-600 text-2sm font-medium">
@@ -120,24 +123,31 @@
                     </h3>
                 </div>
 
+                <!-- formulaire pour ajouter un etudiant -->
                 <form method="POST" action="{{ route('student.store') }}">
                     @csrf
 
                 <div class="card-body flex flex-col gap-5">
+                    <!-- permet d'ajouter le nom de l'etudiant -->
                     <x-forms.input name="last_name" :label="__('Nom')" />
 
+                    <!-- permet d'ajouter le prenom de l'etudiant -->
                     <x-forms.input name="first_name" :label="__('Prénom')" />
 
+                    <!-- permet d'ajouter l'email de l'etudiant -->
                     <x-forms.input name="email" :label="__('Email')" />
 
+                    <!-- permet d'ajouter l'anniv de l'etudiant -->
                     <x-forms.input type="date" name="birth_date" :label="__('Date de naissance')" placeholder="" />
 
+                    <!-- permet d'ajouter l'etablissement de l'etudiant -->
                     <x-forms.dropdown type="select" name="school" :label="__('Etablissement')">
                         @foreach ($schools as $school)
                             <option value="{{ $school->id }}">{{ $school->name }}</option>
                         @endforeach
                     </x-forms.dropdown>
 
+                    <!-- bouton pour soumettre le formulaire -->
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>

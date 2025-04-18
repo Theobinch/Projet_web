@@ -19,6 +19,7 @@
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
+                        <!-- permet d'afficher le nom des promotions ainsi que son année -->
                         @foreach($cohorts as $cohort)
                             <div class="lg:col-span-2">
                                 <div class="card card-grid h-full min-w-full">

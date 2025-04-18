@@ -41,21 +41,25 @@
                                     <tbody>
                                     @foreach ($cohortTeachers as $cohortTeacher)
                                         <tr>
+                                            <!-- affiche le nom de l'enseignant -->
                                             <td>{{ $cohortTeacher->last_name ?? '---' }}</td>
+                                            <!-- affiche le prenom de l'enseignant -->
                                             <td>{{ $cohortTeacher->first_name ?? '---' }}</td>
 
                                             <td>
+                                                <!-- si role admin, affiche bouton suppression -->
                                                 @if ($userRole === 'admin')
+                                                    <!-- formulaire de suppression -->
                                                 <form action="{{ route('cohort_teacher.delete', ['userId' => $cohortTeacher->id, 'cohortId' => $cohort->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous supprimer cet enseignant de cette promotion ?')">
                                                     @csrf
                                                     @method('DELETE')
+                                                    <!-- bouton supprimer -->
                                                     <button type="submit" class="cursor-pointer text-red-600">
                                                         <i class="ki-filled ki-trash"></i>
                                                     </button>
                                                 </form>
                                                 @endif
                                             </td>
-
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -110,9 +114,12 @@
                                     <tbody>
                                     @foreach ($cohortStudents as $cohortStudent)
                                         <tr>
+                                            <!-- affiche le nom de l'etudiant -->
                                             <td>{{ $cohortStudent->last_name ?? '---' }}</td>
+                                            <!-- affiche le prenom de l'etudiant -->
                                             <td>{{ $cohortStudent->first_name ?? '---' }}</td>
                                             <td>
+                                                <!-- affiche la date d'anniversaire de l'etudiant -->
                                                 @if($cohortStudent->birth_date)
                                                     {{ \Carbon\Carbon::parse($cohortStudent->birth_date)->format('d/m/Y') }}
                                                 @else
@@ -121,10 +128,11 @@
                                             </td>
 
                                             <td>
-
+                                                <!-- formulaire de suppression d'un etudiant -->
                                                 <form action="{{ route('cohort_student.delete', ['userId' => $cohortStudent->id, 'cohortId' => $cohort->id]) }}" method="POST" onsubmit="return confirm('Voulez-vous supprimer cet étudiant de cette promotion ?')">
                                                     @csrf
                                                     @method('DELETE')
+                                                    <!-- bouton supprimer -->
                                                     <button type="submit" class="cursor-pointer text-red-600">
                                                         <i class="ki-filled ki-trash"></i>
                                                     </button>
@@ -174,6 +182,7 @@
                     <div class="card-body flex flex-col gap-5">
 
                         <x-forms.dropdown type="select" name="user_id" :label="__('Etudiant')">
+                            <!-- affiche la liste des etudiants grace a une boucle -->
                             @foreach ($students as $student)
                                 <option value="{{ $student->id }}">
                                     {{ $student->last_name }} {{ $student->first_name }}
@@ -181,6 +190,7 @@
                             @endforeach
                         </x-forms.dropdown>
 
+                        <!-- bouton pour soumettre le formulaire -->
                         <x-forms.primary-button>
                             {{ __('Valider') }}
                         </x-forms.primary-button>
@@ -192,6 +202,7 @@
                     <div class="card-body flex flex-col gap-5">
 
                         <x-forms.dropdown type="select" name="user_id" :label="__('Enseignant')">
+                            <!-- affiche la liste des enseignant grace a une boucle -->
                             @foreach ($teachers as $teacher)
                                 <option value="{{ $teacher->id }}">
                                     {{ $teacher->last_name }} {{ $teacher->first_name }}
@@ -199,6 +210,7 @@
                             @endforeach
                         </x-forms.dropdown>
 
+                        <!-- bouton pour soumettre le formulaire -->
                         <x-forms.primary-button>
                             {{ __('Valider') }}
                         </x-forms.primary-button>

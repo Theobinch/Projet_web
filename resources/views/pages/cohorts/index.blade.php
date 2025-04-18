@@ -46,6 +46,7 @@
                                     @foreach ($cohorts as $cohort)
                                         <tr>
                                             <td>
+                                                <!-- ouverture du modal pour modifier -->
                                                 <a class="hover:text-primary cursor-pointer" href="#"
                                                    data-modal-toggle="#cohort-modal"
                                                    data-cohort="{{ route('cohort.form', $cohort) }}">
@@ -57,6 +58,7 @@
                                                     {{ $cohort->name ?? '---' }}</a>
                                             </td>
                                             <td>
+                                                <!-- date de debut et fin de la promo -->
                                                 @if ($cohort->start_date && $cohort->end_date)
                                                     {{ \Carbon\Carbon::parse($cohort->start_date)->format('Y') }} -
                                                     {{ \Carbon\Carbon::parse($cohort->end_date)->format('Y') }}
@@ -65,11 +67,13 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                <!-- nombre des etudiants et bouton supprimer -->
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
                                                         <span>{{ $cohort->studentCount }}</span>
                                                     </a>
 
+                                                    <!-- formulaire pour supprimer la promotion -->
                                                     <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cette promotion ?')">
                                                         @csrf
                                                         @method('DELETE')
@@ -113,20 +117,27 @@
                     @csrf
 
                     <div class="card-body flex flex-col gap-5">
+                        <!-- nom de la promo -->
                         <x-forms.input name="name" :label="__('Nom')" />
 
+                        <!-- description de la promo -->
                         <x-forms.input name="description" :label="__('Description')" />
 
+                        <!-- ecole de la promo -->
                         <x-forms.dropdown name="school_id" :label="__('École')">
+                            <!-- montre les ecoles disponible -->
                             @foreach ($schools as $school)
                                 <option value="{{ $school->id }}">{{ $school->name }}</option>
                             @endforeach
                         </x-forms.dropdown>
 
+                        <!-- date de debut de la promo -->
                         <x-forms.input type="date" name="start_date" :label="__('Début de l\'année')" />
 
+                        <!--date de fin de la promo -->
                         <x-forms.input type="date" name="end_date" :label="__('Fin de l\'année')" />
 
+                        <!-- bouton pour transmettre le formulaire -->
                         <x-forms.primary-button>
                             {{ __('Valider') }}
                         </x-forms.primary-button>

@@ -71,6 +71,7 @@
                             <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
                                href="{{ route('cohort.show', $cohort->id) }}">
                                <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
+                                   <!-- affiche le nom de la promo -->
                                    {{ $cohort->name }}
                                </span>
                             </a>
@@ -106,7 +107,7 @@
                         </a>
                     </div>
                 @endcan
-           </div>
+            </div>
             @endcan
             <!-- End of Primary Menu -->
             <div class="border-b border-gray-300 mt-4 mb-4 mx-3.5"></div>

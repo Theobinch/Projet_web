@@ -10,6 +10,7 @@
     <!-- begin: grid -->
 
     <div class="grid lg:grid-cols-2 gap-5 lg:gap-7.5 items-stretch">
+        <!-- permet d'afficher le nombre des promotions present dans la bdd -->
         <form method="GET" action="{{ route('cohort.index') }}">
             <div class="lg:col-span-2">
                 <div class="grid">
@@ -23,6 +24,7 @@
                             </a>
                         </div>
                         <div class="card-body flex flex-col gap-5">
+                            <!-- bouton d'acces rapide qui ramene sur la page cohort index -->
                             <x-forms.primary-button>
                                 {{ __('Accès rapide') }}
                             </x-forms.primary-button>
@@ -32,6 +34,7 @@
             </div>
         </form>
 
+        <!-- permet d'afficher le nombre d'enseignant present dans la bdd -->
         <form method="GET" action="{{ route('teacher.index') }}">
             <div class="lg:col-span-2">
                 <div class="card card-grid h-full min-w-full">
@@ -43,6 +46,7 @@
                             <span>{{ $teacherCount }}</span>
                         </a>
                     </div>
+                    <!-- bouton d'acces rapide qui ramene sur la page teacher index -->
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
                     </x-forms.primary-button>
@@ -50,6 +54,7 @@
             </div>
         </form>
 
+        <!-- permet d'afficher le nombre d'etudiant present dans la bdd -->
         <form method="GET" action="{{ route('student.index') }}">
             <div class="lg:col-span-2">
                 <div class="card card-grid h-full min-w-full">
@@ -61,6 +66,7 @@
                             <span>{{ $studentCount }}</span>
                         </a>
                     </div>
+                    <!-- bouton d'acces rapide qui ramene sur la page student index -->
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
                     </x-forms.primary-button>
@@ -68,6 +74,7 @@
             </div>
         </form>
 
+        <!-- permet d'afficher le nombre de groupe present dans la bdd -->
         <form method="GET" action="{{ route('group.index') }}">
             <div class="lg:col-span-2">
                 <div class="card card-grid h-full min-w-full">
@@ -77,6 +84,7 @@
                         </h3>
                         <h4>0</h4>
                     </div>
+                    <!-- bouton d'acces rapide qui ramene sur la page group index -->
                     <x-forms.primary-button>
                         {{ __('Accès rapide') }}
                     </x-forms.primary-button>
